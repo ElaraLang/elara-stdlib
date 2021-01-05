@@ -1,0 +1,17 @@
+namespace elara/std
+
+let recursiveLoop(Int current, Int total, (Int) => Unit fun) => {
+    if current == total {
+           return
+    }
+    fun(current)
+    recursiveLoop(current + 1, total, fun)
+}
+
+let loopIndexed(Int times, (Int) => Unit fun) => {
+    recursiveLoop(0, times, fun)
+}
+
+let loop(Int times, () => Unit fun) => {
+    recursiveLoop(0, times, (Int _) => { fun() })
+}

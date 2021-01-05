@@ -1,0 +1,19 @@
+namespace elara/std
+
+
+let join(Any[] list, String separator) => {
+	return recToString(list, "", separator, 0)
+}
+
+let recToString(Any[] col, String current, String separator, Int index) => {
+	if index == col.size {
+		return current
+	}
+
+	if index == col.size - 1 {
+		return current + col[index]
+	}
+
+	let part = current + col[index] + separator
+	return recToString(col, part, separator, index + 1)
+}

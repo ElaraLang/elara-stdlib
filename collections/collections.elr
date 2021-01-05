@@ -1,0 +1,18 @@
+namespace elara/std
+
+let forEach(Any[] col, (Any) => Unit fun) => {
+	forEachIndexed(col, (Int index, Any value) => {
+		fun(value)
+	})
+}
+
+let forEachIndexed(Any[] col, (Int, Any) => Unit fun) => {
+    loopIndexed(col.size, (Int index) => {
+        fun(index, col[index])
+    })
+}
+
+
+let toString(Any[] col) => {
+	return "[" + col.join(", ") + "]"
+} 

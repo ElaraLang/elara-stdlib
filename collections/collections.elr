@@ -18,15 +18,30 @@ let toString(Any[] col) => {
 
 let map(Any[] col, (Any) => Any mapper) => {
 	if col.size == 0 {
-		return col
+		return empty()
 	}
-	return mapRec(col, 0, empty(), mapper)
+	return mapRec(col, 0, mapper)
 }
 
-let mapRec(Any[] col, Int index, Any[] acc, (Any) => Any mapper) => {
+let mapRec(Any[] col, Int index, (Any) => Any mapper) => {
 	if index == col.size {
 		return empty()
 	}
 	let mappedElem = mapper(col[index])
-	return acc + [mappedElem] + mapRec(col, index + 1, acc, mapper)
+	return [mappedElem] + mapRec(col, index + 1, mapper)
+}
+
+let filter(Any[] col, (Any) => Boolean predicate) => {
+	return filterRec(col, 0, predicate)
+}
+
+let filterRec(Any[] col, Int index, (Any) => Boolean predicate) => {
+	if index == col.size {
+		return empty()
+	}
+	let passes = predicate(col[index])
+	if passes {
+		return [col[index]] + filterRec(col, index + 1, predicate)
+	}
+	return filterRec(col, index + 1, predicate)
 }

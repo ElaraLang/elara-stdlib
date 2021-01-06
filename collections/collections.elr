@@ -45,3 +45,12 @@ let filterRec(Any[] col, Int index, (Any) => Boolean predicate) => {
 	}
 	return filterRec(col, index + 1, predicate)
 }
+
+let times(Any[] col, Int quantity) => {
+	let mut base = col
+	loop(quantity, () => {
+		base = base + col
+	})
+
+	return base
+}

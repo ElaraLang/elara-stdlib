@@ -1,0 +1,4 @@
+namespace elara/std
+
+
+let run(() => Unit fun) => { fun() }

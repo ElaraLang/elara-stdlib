@@ -9,9 +9,15 @@ let recursiveLoop(Int current, Int total, (Int) => Unit fun) => {
 }
 
 let loopIndexed(Int times, (Int) => Unit fun) => {
-    recursiveLoop(0, times, fun)
+  	let mut count = 0
+	while count != times {
+		fun(count)
+		count = count + 1
+	}
 }
 
 let loop(Int times, () => Unit fun) => {
-    recursiveLoop(0, times, (Int _) => { fun() })
+	loopIndexed(times, (Int _) => {
+		fun()
+	})
 }

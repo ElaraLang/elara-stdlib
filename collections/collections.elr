@@ -12,15 +12,12 @@ let forEachIndexed(Any[] col, (Int, Any) => Unit fun) => {
     })
 }
 
-let toString(Any[] col) => {
-	return "[" + col.join(", ") + "]"
-}
-
 let map(Any[] col, (Any) => Any mapper) => {
-	if col.size == 0 {
-		return empty()
-	}
-	return mapRec(col, 0, mapper)
+	let mut mapped = empty()
+	loopIndexed(col.size, (Int i) => {
+		mapped = mapped + [mapper(col[i])]
+	})
+	return mapped
 }
 
 let mapRec(Any[] col, Int index, (Any) => Any mapper) => {
@@ -44,13 +41,4 @@ let filterRec(Any[] col, Int index, (Any) => Boolean predicate) => {
 		return [col[index]] + filterRec(col, index + 1, predicate)
 	}
 	return filterRec(col, index + 1, predicate)
-}
-
-let times(Any[] col, Int quantity) => {
-	let mut base = col
-	loop(quantity, () => {
-		base = base + col
-	})
-
-	return base
 }

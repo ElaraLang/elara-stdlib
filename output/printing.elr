@@ -1,7 +1,7 @@
 namespace elara/std
 
 let print = (Any msg) => Unit {
-    print-raw(msg + "\n")
+    print-raw(msg.toString() + "\n")
 }
 
 let print-raw = (Any msg) => {

@@ -12,7 +12,21 @@ let forEachIndexed(Any[] col, (Int, Any) => Unit fun) => {
     })
 }
 
-
 let toString(Any[] col) => {
 	return "[" + col.join(", ") + "]"
-} 
+}
+
+let map(Any[] col, (Any) => Any mapper) => {
+	if col.size == 0 {
+		return col
+	}
+	return mapRec(col, 0, empty(), mapper)
+}
+
+let mapRec(Any[] col, Int index, Any[] acc, (Any) => Any mapper) => {
+	if index == col.size {
+		return empty()
+	}
+	let mappedElem = mapper(col[index])
+	return acc + [mappedElem] + mapRec(col, index + 1, acc, mapper)
+}
